@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppEntity } from "./app.entity";
+import { AppEntity } from './app.entity';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -8,16 +8,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: "localhost",
+      host: 'localhost',
       port: 5432,
       username: 'postgres',
       password: 'password',
       database: 'tbl_pretest',
       synchronize: true,
       entities: [AppEntity],
-      logging: true
+      logging: true,
     }),
-    TypeOrmModule.forFeature([AppEntity])
+    TypeOrmModule.forFeature([AppEntity]),
   ],
   controllers: [AppController],
   providers: [AppService],
