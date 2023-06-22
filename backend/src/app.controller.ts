@@ -8,6 +8,7 @@ import {
   Query,
   Body,
   NotFoundException,
+  Patch,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AppEntity } from './app.entity';
@@ -22,7 +23,7 @@ export class AppController {
   //   return this.appService.getHello();
   // }
   @Post()
-  async create(@Query('description') description: string): Promise<AppEntity> {
+  async create(@Body('description') description: string): Promise<AppEntity> {
     return this.appService.createTask(description);
   }
   @Get()
@@ -36,7 +37,7 @@ export class AppController {
   // ): Promise<AppEntity> {
   //   return await this.appService.updateTask(id, completed);
   // }
-  @Put(':id')
+  @Patch(':id')
   async updateTask(
     @Param('id') id: number,
     @Body() updateTaskDto: UpdateTaskDto,

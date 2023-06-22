@@ -1,5 +1,5 @@
 type Options = {
-  body?: Object;
+  body?: unknown;
   headers?: Record<string, string>;
 };
 
@@ -8,21 +8,24 @@ export enum HttpMethod {
   POST = "post",
   PATCH = "patch",
   DELETE = "delete",
+  PUT = "PUT",
 }
 
 export const initFetch = (apiUrl: string) => {
   return <T>(
     method: HttpMethod,
     url: string,
-    opts: Options = { body: {}, headers: {} },
+    opts: Options = { body: {}, headers: {} }
   ): Promise<T> => {
-    if (!/^(http|https)\:\/\//.test(url)) {
+    if (!/^(http|https)\\:\/\//.test(url)) {
       url = apiUrl + url;
     }
 
     const headers = Object.assign(opts.headers || {}, {
       Accept: "application/json",
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "http://127.0.0.1:5173",
+      "Access-Control-Allow-Headers": "*",
     });
 
     const config: RequestInit = {
